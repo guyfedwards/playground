@@ -1,0 +1,36 @@
+Arguments: 
+  /usr/local/bin/node /usr/local/Cellar/yarn/1.6.0/libexec/bin/yarn.js init
+
+PATH: 
+  /Users/guyedwards/.yarn/bin:/Users/guyedwards/.npm-packages/bin:/usr/local/heroku/bin:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:/usr/local/sbin:/Users/guyedwards/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/guyedwards/.yarn/bin:/Users/guyedwards/.npm-packages/bin:/usr/local/heroku/bin:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/sbin:/Users/guyedwards/bin:/Users/guyedwards/.gem/ruby/2.0.0/bin:/Users/guyedwards/go/bin:/Users/guyedwards/.fzf/bin:/Users/guyedwards/.gem/ruby/2.0.0/bin:/Users/guyedwards/go/bin
+
+Yarn version: 
+  1.6.0
+
+Node version: 
+  8.9.4
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: canceled
+      at Interface.<anonymous> (/usr/local/Cellar/yarn/1.6.0/libexec/lib/cli.js:129516:13)
+      at emitNone (events.js:106:13)
+      at Interface.emit (events.js:208:7)
+      at Interface._ttyWrite (readline.js:775:16)
+      at ReadStream.onkeypress (readline.js:160:10)
+      at emitTwo (events.js:126:13)
+      at ReadStream.emit (events.js:214:7)
+      at emitKeys (internal/readline.js:420:14)
+      at emitKeys.next (<anonymous>)
+      at ReadStream.onData (readline.js:1011:36)
+
+npm manifest: 
+  No manifest
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

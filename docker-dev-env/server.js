@@ -11,4 +11,51 @@ app.get('/', (req, res) => {
 
 app.get('/postgres/:blurb', (req, res) => {
   const ip = req.connection.remoteAddress
+  const db = new pg.Pool({ connectionString: process.env.DATABASE_URL })
+
+  db.connect((err, client, done) => {
+    client.query(
+      'create table if not exists "blurbs" ("id" serial primary key, "text" varchar(255))',
+      (err, result) => {
+        client.query(
+          'insert into "blurbs" ("text") values ($1)',
+          [req.params.blurb],
+          (err, result) => {
+            client.query(
+              'select * from "blurbs"',
+              (err, result) => {
+                const blurbs = results.rows.map(r => r.text)
+                res.send(`List of blurbs:\n${blurbs.join(' ')}`)
+                client.end()
+                done()
+              }
+            )
+
+          }
+        )
+      }
+    )
+  })
 });
+
+app.get('/redis', (req, res) => {
+  const client = redis.createClient(process.env.REDIS_URL)
+  client.incr('count', (err, reply) => {
+    res.send(`Request count: ${reply}`)
+  })
+})
+
+app.get('/rabbit/:msg', (req, res) => {
+  amqp.connect(process.env.RABBIT_URL, (err, conn) => {
+    conn.createChannel((err, ch) => {
+      const q = 'web'
+      ch.assertQueue(q, { durable: false })
+      ch.sendToQueue(q, { Buffer.from(req.params.msg) })
+    })
+    res.send('Message sent to worker process, check your terminal!')
+  })
+})
+
+app.listen(process.env.PORT, () => {
+  console.log(`Example app listening on port ${process.env.PORT}`)
+})

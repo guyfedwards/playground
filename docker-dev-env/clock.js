@@ -13,3 +13,4 @@ cron.schedule('* * * * *', () => {
   })
 })
 
+cron.run()
